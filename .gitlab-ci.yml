@@ -16,6 +16,7 @@ build:
 
 deploy:
   stage: deploy
+  needs: ["build"]
   script:
     - echo "registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
     - echo "_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
