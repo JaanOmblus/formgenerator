@@ -6,6 +6,7 @@ stages:
 
 build:
   stage: build
+  image: harbor.riaint.ee/vis3/vis3-node-builder-16:master-16.15.0-3656
   script:
     - npm config list
     - npm i
