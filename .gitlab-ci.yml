@@ -1,12 +1,10 @@
-image: nexus.riaint.ee:8500/node:latest
+image: nexus.riaint.ee:8500/node:16.15.1-slim
 
 stages:
-  - build
-  - deploy
+  - publish
 
-build:
-  stage: build
-  image: harbor.riaint.ee/vis3/vis3-node-builder-16:master-16.15.0-3656
+publish:
+  stage: publish
   script:
     - npm i
     - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
@@ -14,10 +12,6 @@ build:
     - npm version ${PACKAGE_VERSION} --no-git-tag-version && cd projects/ria/${COMPONENT_NAME} && npm version ${PACKAGE_VERSION} --no-git-tag-version && cd ../../../
     - npm run build-prod @ria/stateportal-form-generator
 
-deploy:
-  stage: deploy
-  needs: ["build"]
-  script:
     - echo "registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
     - echo "_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
