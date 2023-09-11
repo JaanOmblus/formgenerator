@@ -22,4 +22,4 @@ deploy:
     - echo "_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
     - npm config list
-    - npm publish
+    - npm publish dist/ria/stateportal-form-generator
