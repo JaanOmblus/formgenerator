@@ -9,8 +9,9 @@ build:
   script:
     - echo "registry=https://nexus.riaint.ee/repository/npm-public/">.npmrc
     - echo "@ria:registry=https://nexus.riaint.ee/repository/riigiportaal-npm-local/">>.npmrc
-    - npm install
-    - npm run build @ria/stateportal-form-generator
+    - npm i
+    - npm version patch --no-git-tag-version
+    - npm run build-prod @ria/stateportal-form-generator
 
 deploy:
   stage: deploy
