@@ -12,7 +12,8 @@ publish:
     - echo CI_DEPLOY_PASSWORD=${CI_DEPLOY_PASSWORD}
     - echo CI_PROJECT_ID=${CI_PROJECT_ID}
     - echo CI_SERVER_HOST=${CI_SERVER_HOST}
-    
+    - printenv
+
     # - npm i
     #
     # - npm version ${PACKAGE_VERSION} --no-git-tag-version
