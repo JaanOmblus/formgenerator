@@ -8,9 +8,10 @@ build:
   stage: build
   image: harbor.riaint.ee/vis3/vis3-node-builder-16:master-16.15.0-3656
   script:
-    - npm config list
     - npm i
-    - ls -lah
+    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    - PACKAGE_VERSION=${NPM_PACKAGE_VERSION}-${CI_JOB_ID}
+    - npm version ${PACKAGE_VERSION} --no-git-tag-version && cd projects/ria/${COMPONENT_NAME} && npm version ${PACKAGE_VERSION} --no-git-tag-version && cd ../../../
     - npm run build-prod @ria/stateportal-form-generator
 
 deploy:
