@@ -1,4 +1,4 @@
-image: node:latest
+image: nexus.riaint.ee:8500/node:latest
 
 stages:
   - deploy
