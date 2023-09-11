@@ -1,7 +1,15 @@
 image: nexus.riaint.ee:8500/node:latest
 
 stages:
+  - build
   - deploy
+
+build:
+  stage: build
+  script:
+    - npm version patch
+    - npm install
+    - npm run build @ria/stateportal-form-generator
 
 deploy:
   stage: deploy
