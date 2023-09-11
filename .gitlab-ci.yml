@@ -6,11 +6,15 @@ stages:
 publish:
   stage: publish
   script:
+    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    - PACKAGE_VERSION=${NPM_PACKAGE_VERSION}-${CI_JOB_ID}
     - echo CI_DEPLOY_USER=${CI_DEPLOY_USER}
     - echo CI_DEPLOY_PASSWORD=${CI_DEPLOY_PASSWORD}
+    - echo CI_PROJECT_ID=${CI_PROJECT_ID}
+    - echo CI_SERVER_HOST=${CI_SERVER_HOST}
+    
     # - npm i
-    # - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    # - PACKAGE_VERSION=${NPM_PACKAGE_VERSION}-${CI_JOB_ID}
+    #
     # - npm version ${PACKAGE_VERSION} --no-git-tag-version
     # - cd projects/ria/form-generator
     # - npm version ${PACKAGE_VERSION} --no-git-tag-version
