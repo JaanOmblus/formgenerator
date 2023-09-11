@@ -6,17 +6,19 @@ stages:
 publish:
   stage: publish
   script:
-    - npm i
-    - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
-    - PACKAGE_VERSION=${NPM_PACKAGE_VERSION}-${CI_JOB_ID}
-    - npm version ${PACKAGE_VERSION} --no-git-tag-version
-    - cd projects/ria/form-generator
-    - npm version ${PACKAGE_VERSION} --no-git-tag-version
-    - cd ../../../
-    - npm run build-prod @ria/stateportal-form-generator
+    - echo CI_DEPLOY_USER=${CI_DEPLOY_USER}
+    - echo CI_DEPLOY_PASSWORD=${CI_DEPLOY_PASSWORD}
+    # - npm i
+    # - NPM_PACKAGE_VERSION=$(node -p "require('./package.json').version")
+    # - PACKAGE_VERSION=${NPM_PACKAGE_VERSION}-${CI_JOB_ID}
+    # - npm version ${PACKAGE_VERSION} --no-git-tag-version
+    # - cd projects/ria/form-generator
+    # - npm version ${PACKAGE_VERSION} --no-git-tag-version
+    # - cd ../../../
+    # - npm run build-prod @ria/stateportal-form-generator
 
-    - echo "registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
-    - echo "_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
-    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
-    - npm config list
-    - npm publish dist/ria/stateportal-form-generator
+    # - echo "registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
+    # - echo "_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
+    # - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
+    # - npm config list
+    # - npm publish dist/ria/stateportal-form-generator
