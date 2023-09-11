@@ -7,6 +7,8 @@ stages:
 build:
   stage: build
   script:
+    - echo "registry=https://nexus.riaint.ee/repository/npm-public/">.npmrc
+    - echo "@ria:registry=https://nexus.riaint.ee/repository/riigiportaal-npm-local/">>.npmrc
     - npm install
     - npm run build @ria/stateportal-form-generator
 
@@ -16,5 +18,4 @@ deploy:
     - echo "registry=https://${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
     - echo "_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_DEPLOY_PASSWORD}">>.npmrc
-    - npm config list
     - npm publish
